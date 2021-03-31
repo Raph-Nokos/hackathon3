@@ -44,17 +44,23 @@ function updateGameArea() {
 }
 
 function moveup() {
-    myGamePiece.speedY -= 1; 
+  //  myGamePiece.y-= 10;
+     sock.emit('positionY', myGamePiece.y-10 )
 }
 
 function movedown() {
-    myGamePiece.speedY += 1; 
+   // myGamePiece.y += 10; 
+    sock.emit('positionY', myGamePiece.y+10 )
+
 }
 
 function moveleft() {
-    myGamePiece.speedX -= 1; 
+  //  myGamePiece.x -= 10; 
+    sock.emit('positionX', myGamePiece.x-10 )
+
 }
 
 function moveright() {
-    myGamePiece.x += 10; 
+    // myGamePiece.x += 10; 
+    sock.emit('positionX', myGamePiece.x+10 )
 }
