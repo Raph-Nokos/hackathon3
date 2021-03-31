@@ -1,7 +1,8 @@
 let myGamePiece;
+let missiles = []
 
 function startGame() {
-    myGamePiece = new component(30, 30, "red", 10, 120);
+    myGamePiece = new player(30, 30, "red", 10, 120);
     myGameArea.start();
 }
 
@@ -19,7 +20,7 @@ const myGameArea = {
     }
 }
 
-function component(width, height, color, x, y) {
+function player(width, height, color, x, y) {
     this.width = width;
     this.height = height;
     this.speedX = 0;
@@ -32,8 +33,9 @@ function component(width, height, color, x, y) {
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
     this.newPos = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;        
+        // this.x += this.speedX;
+        // this.y += this.speedY;        
+
     }    
 }
 
@@ -64,3 +66,60 @@ function moveright() {
     // myGamePiece.x += 10; 
     sock.emit('positionX', myGamePiece.x+10 )
 }
+
+
+// code à ajouter
+
+// DEPLACEMENT JOUEUR
+// let Keys = {
+// 	up: false,
+// 	down: false,
+// 	left: false,
+// 	right: false,
+// }
+
+// document.onkeydown = function (e) {
+// 	const kc = e.keyCode
+
+
+// 	if (kc === 37) {
+// 		Keys.left = true
+// 		myGamePiece.speedX = -2
+// 	}
+// 	//only one key per event
+// 	if (kc === 38) {
+// 		Keys.up = true
+// 		myGamePiece.speedY = -2
+// 	}
+// 	//so check exclusively
+// 	if (kc === 39) {
+// 		Keys.right = true
+// 		myGamePiece.speedX = 2
+// 	}
+// 	if (kc === 40) {
+// 		Keys.down = true
+// 		myGamePiece.speedY = 2
+// 	}
+// }
+
+// document.onkeyup = function (e) {
+// 	const kc = e.keyCode
+
+
+// 	if (kc === 37) {
+// 		Keys.left = false
+// 		myGamePiece.speedX = 0
+// 	}
+// 	if (kc === 38) {
+// 		Keys.up = false
+// 		myGamePiece.speedY = 0
+// 	}
+// 	if (kc === 39) {
+// 		Keys.right = false
+// 		myGamePiece.speedX = 0
+// 	}
+// 	if (kc === 40) {
+// 		Keys.down = false
+// 		myGamePiece.speedY = 0
+// 	}
+// }

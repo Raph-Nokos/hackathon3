@@ -11,22 +11,43 @@ app.use(express.static(Path.join(__dirname, "client")));
 const server = http.createServer(app);
 const io = socketio(server);
 
-const players = []
-
+let players = {}
 io.on("connection", sock => {
   // cest ici que ca se passe
 
-  io.emit('askName'); // on demande leurs noms aux joueurs
+// create a new player and add it to our players object
+players[sock.id] = {
+  rotation: 0,
+  x: Math.floor(Math.random() * 100) + 50,
+  y: Math.floor(Math.random() * 100) + 50,
+  playerId: sock.id,
+};
+// send the players object to all players
+//io.emit('currentPlayers', players);
+// update all  players of the new player
+io.emit('newPlayer', players[sock.id]);
+
+
+// when a player disconnects, remove them from our players object
+sock.on('disconnect', function () {
+  console.log('user disconnected');
+  // remove this player from our players object
+  delete players[sock.id];
+  // emit a message to all players to remove this player
+ // io.emit('disconnect', sock.id);
+});
+
+
+  sock.emit('askName'); // on demande leurs noms aux joueurs
 
   sock.on("message", text => {
-    io.emit("message", text); // io.emit envoie a tous les clients
+    io.emit("message", text,players[sock.id]); // io.emit envoie a tous les clients
   });
   sock.on("name", text => {
-    io.emit("message", 'Bonjour '+text); // io.emit envoie a tous les clients
-    players.push(text);
-    io.emit("message", 'Joueurs en cours de partie '+players.join(', '))
+    players[sock.id].name=text;
+    console.log(players[sock.id])
+    io.emit("message", 'Bonjour '+text, players[sock.id]); // io.emit envoie a tous les clients
   });
-
 
   sock.on("positionY", posY => {
     io.emit("positionY", posY);
@@ -34,8 +55,8 @@ io.on("connection", sock => {
   sock.on("positionX", posX => {
     io.emit("positionX", posX); 
   });
-  sock.on('disconnect', function() {
-    io.emit("message", 'Bye bye');  });
+
+
 });
 
 
