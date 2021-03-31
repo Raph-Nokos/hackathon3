@@ -35,10 +35,22 @@ window.onkeyup = function (e) {
 }
 
 function movePlayer() {
-	if (keyboard[37]) socket.emit("move left")
-	if (keyboard[38]) socket.emit("move up")
-	if (keyboard[39]) socket.emit("move right")
-	if (keyboard[40]) socket.emit("move down")
+	if (keyboard[37]) {
+		socket.emit("move left")
+		socket.emit("position")
+	}
+	if (keyboard[38]) {
+		socket.emit("move up")
+		socket.emit("position")
+	}
+	if (keyboard[39]) {
+		socket.emit("move right")
+		socket.emit("position")
+	}
+	if (keyboard[40]) {
+		socket.emit("move down")
+		socket.emit("position")
+	}
 }
 
 // PLAYER ACTIONS

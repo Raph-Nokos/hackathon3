@@ -16,7 +16,7 @@ module.exports = function (server) {
 			speed: 2,
 			color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
 		}
-		console.log(players)
+
 		// PLAYERS MOOVES
 		socket.on("move left", function () {
 			players[socket.id].x -= players[socket.id].speed
@@ -29,6 +29,9 @@ module.exports = function (server) {
 		})
 		socket.on("move down", function () {
 			players[socket.id].y += players[socket.id].speed
+		})
+		socket.on("position", function () {
+			console.log(`players[socket.id].x, players[socket.id].y`)
 		})
 		// PLAYER ACTIONS
 
