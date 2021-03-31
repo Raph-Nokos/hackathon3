@@ -46,6 +46,15 @@ function updateGameArea() {
 
 
 // DEPLACEMENT JOUEUR
+const keyboard = {};
+
+window.onkeydown = function(e) {
+  keyboard[e.keyCode] = true;
+};
+
+window.onkeyup = function(e) {
+  delete keyboard[e.keyCode];
+};
 let Keys = {
 	up: false,
 	down: false,

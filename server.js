@@ -11,7 +11,7 @@ app.use(express.static(Path.join(__dirname, "client")));
 const server = http.createServer(app);
 const io = socketio(server);
 
-let players = {}
+const players = {}
 io.on("connection", sock => {
   // cest ici que ca se passe
 
