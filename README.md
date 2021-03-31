@@ -1,2 +1,2 @@
 # hackathon3
-### A game jam with Phaser
+### A game jam using Socket.io, canvas and JavaScript 
