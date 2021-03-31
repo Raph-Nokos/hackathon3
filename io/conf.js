@@ -16,6 +16,7 @@ module.exports = function (server) {
       speed: 2,
       c: "#" + (((1 << 24) * Math.random()) | 0).toString(16)
     };
+    // PLAYERS MOOVES
     socket.on("move left", function () {
       players[socket.id].x -= players[socket.id].speed;
     });
@@ -28,12 +29,14 @@ module.exports = function (server) {
     socket.on("move down", function () {
       players[socket.id].y += players[socket.id].speed;
     });
+    // PLAYER ACTIONS
+
     // delete disconnected player
     socket.on("disconnect", function () {
       delete players[socket.id];
     });
     function update() {
-      io.volatile.emit("players list", Object.values(players));
+      io.emit("players list", Object.values(players));
     }
 
     setInterval(update, 1000 / 60);

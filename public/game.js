@@ -23,7 +23,7 @@ function update() {
 }
 // first call
 requestAnimationFrame(update);
-
+// PLAYER MOOVES
 const keyboard = {};
 
 window.onkeydown = function (e) {
@@ -40,3 +40,7 @@ function movePlayer() {
   if (keyboard[39]) socket.emit("move right");
   if (keyboard[40]) socket.emit("move down");
 }
+
+// PLAYER ACTIONS
+
+socket.emit("click");
