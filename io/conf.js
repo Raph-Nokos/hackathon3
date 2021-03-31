@@ -17,6 +17,19 @@ module.exports = function (server) {
       color: "#" + (((1 << 24) * Math.random()) | 0).toString(16)
     };
 
+    // CHAT PART
+
+    // socket.emit("askName"); // on demande leurs noms aux joueurs
+
+    // socket.on("message", text => {
+    //   io.emit("message", text, players[socket.id]); // io.emit envoie a tous les clients
+    // });
+    // socket.on("name", text => {
+    //   players[socket.id].name = text;
+    //   console.log(players[sock.id]);
+    //   io.emit("message", "Bonjour " + text, players[socket.id]); // io.emit envoie a tous les clients
+    // });
+
     // PLAYERS MOOVES
     socket.on("move left", function () {
       if (players[socket.id].x >= 2)
@@ -36,12 +49,13 @@ module.exports = function (server) {
         players[socket.id].y += players[socket.id].speed;
     });
     socket.on("position", function () {
-      console.log(`${players[socket.id].x}, ${players[socket.id].y}`);
+      // console.log(`${players[socket.id].x}, ${players[socket.id].y}`);
     });
     // PLAYER ACTIONS
 
     // delete disconnected player
     socket.on("disconnect", function () {
+      console.log("user disconnected");
       delete players[socket.id];
     });
     function update() {
