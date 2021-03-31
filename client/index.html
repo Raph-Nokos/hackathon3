@@ -2,12 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<style>
-canvas {
-    border:1px solid #d3d3d3;
-    background-color: #f1f1f1;
-}
-</style>
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body onload="startGame()">
   <div class="button-wrapper">
@@ -21,8 +17,22 @@ canvas {
 
 </script>
 
+<div style="text-align:center;width:480px;">
+  <div id='askname'>
+    <form id="nameForm">
+      <label>Choisis un pseudo : </label>
+    <input id="userName" type=text/>
+    <button id="ok">ok</button>
+  </form>
+  </div>
+  <ul id="events">
+  </ul>
+</div>
+
+
 <p>If you click a button the red square will start moving. Click the same button many times, and it will move faster and faster.</p>
 </body>
+
 <script src="game.js"></script>
 
   <script src="/socket.io/socket.io.js"></script>

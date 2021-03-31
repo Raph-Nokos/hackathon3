@@ -44,6 +44,7 @@ function updateGameArea() {
 	myGamePiece.update()
 }
 
+
 // DEPLACEMENT JOUEUR
 let Keys = {
 	up: false,
@@ -54,7 +55,6 @@ let Keys = {
 
 document.onkeydown = function (e) {
 	const kc = e.keyCode
-	e.preventDefault()
 
 	if (kc === 37) {
 		Keys.left = true
@@ -78,7 +78,6 @@ document.onkeydown = function (e) {
 
 document.onkeyup = function (e) {
 	const kc = e.keyCode
-	e.preventDefault()
 
 	if (kc === 37) {
 		Keys.left = false
@@ -97,3 +96,4 @@ document.onkeyup = function (e) {
 		myGamePiece.speedY = 0
 	}
 }
+
