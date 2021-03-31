@@ -1,11 +1,22 @@
-const writeEvent = text => {
+const writeEvent = (text,player) => {
   // <ul> elem
   const parent = document.querySelector("#events");
+  // <li> elem
+  const el = document.createElement("li");
+  el.innerHTML = `${player.name ? player.name : "incognito"}: ${text}`;
+  parent.appendChild(el);
+  parent.scrollTop = parent.scrollHeight;
+};
+
+const writePlayers = (players) => {
+  // <ul> elem
+  const parent = document.querySelector("#listPlayers");
 
   // <li> elem
   const el = document.createElement("li");
-  el.innerHTML = text;
 
+
+  el.innerText = `${player.name ? player.name : "incognito"}`;
   parent.appendChild(el);
   parent.scrollTop = parent.scrollHeight;
 };
@@ -25,8 +36,7 @@ const onFormSubmittedName = e => {
   input.value = "";
   sock.emit("name", text);
   document.getElementById("askname").style.display = 'none';
-
-};
+}
 
 const askName =()=>{
   document.getElementById("askname").style.display = 'block';
@@ -40,9 +50,11 @@ const updateX = (pos) =>{
 }
 const sock = io();
 sock.on("message", writeEvent);
-sock.on("askName",askName)
+sock.on("newPlayer", writePlayers);
+sock.on("askName", askName)
 sock.on("positionX",updateX)
 sock.on("positionY",updateY)
+
 
 document
   .querySelector("#chat-form")
@@ -51,4 +63,3 @@ document
 document
   .querySelector("#nameForm")
   .addEventListener("submit", onFormSubmittedName);
-

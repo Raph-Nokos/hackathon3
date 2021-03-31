@@ -2,7 +2,7 @@ let myGamePiece
 let missiles = []
 
 function startGame() {
-	myGamePiece = new component(30, 30, "red", 10, 120)
+	myGamePiece = new player(30, 30, "red", 10, 120)
 	myGameArea.start()
 }
 
@@ -20,7 +20,7 @@ const myGameArea = {
 	},
 }
 
-function component(width, height, color, x, y) {
+function player(width, height, color, x, y) {
 	this.width = width
 	this.height = height
 	this.speedX = 0
