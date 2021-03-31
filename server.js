@@ -7,7 +7,7 @@ const Path = require("path");
 
 const app = express();
 
-app.use(express.static(Path.join(__dirname, "/../", "client")));
+app.use(express.static(Path.join(__dirname, "client")));
 
 const server = http.createServer(app);
 

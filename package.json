@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +17,6 @@
     "socket.io": "^4.0.0"
   },
   "dependencies": {
-    "javascript-brunch": "^2.10.0",
-    "less-brunch": "^2.10.0",
-    "nodemon": "^2.0.7",
-    "uglify-js-brunch": "^2.10.0"
+    "nodemon": "^2.0.7"
   }
 }

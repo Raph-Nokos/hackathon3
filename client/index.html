@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <ul id="events"></ul>
-    <div class="button-wrapper">
-      <form id="chat-form">
-        <input id="chat" />
-        <button id="say">say</button>
-      </form>
-    </div>
-  </body>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="startGame()">
+  <div class="button-wrapper">
+    <form id="chat-form">
+      <input id="chat" />
+      <button id="say">say</button>
+    </form>
+
+  </div>
+<script>
+
+</script>
+<div style="text-align:center;width:480px;">
+  <button onclick="moveup()">UP</button><br><br>
+  <button onclick="moveleft()">LEFT</button>
+  <button onclick="moveright()">RIGHT</button><br><br>
+  <button onclick="movedown()">DOWN</button>
+  <ul id="events">
+  </ul>
+</div>
+
+<p>If you click a button the red square will start moving. Click the same button many times, and it will move faster and faster.</p>
+</body>
+<script src="game.js"></script>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="client.js"></script>
+
 </html>
+
