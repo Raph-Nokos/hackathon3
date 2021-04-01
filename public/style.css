@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Rio Grande";
+  src: url("./police/RioGrande.ttf");
+ }
+
 body {
 	background: url("https://i.ibb.co/4SR88N8/Chick.jpg");
 	overflow: hidden;
@@ -16,17 +21,15 @@ body {
 	text-align: center;
 	align-self: center;
 }
+
 #mute {
 	padding: 5px;
 	position: absolute;
 	right: 20;
 	top: 30;
 }
-/* #game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
+
+
 
 #listPlayers {
 	list-style: none;
@@ -38,4 +41,10 @@ body {
 	width: 150px;
 	height: 50vh;
 	overflow: scroll;
+}
+
+.title-game{
+  font-family: 'Rio Grande';
+  font-size: 50px;
+  color: #37111E;
 }
