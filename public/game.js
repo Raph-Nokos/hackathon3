@@ -11,14 +11,19 @@ function drawPlayers() {
     ctx.rect(x, y, size, size);
     ctx.fillStyle = color;
     ctx.fill();
+    let image = document.getElementById('poulet');
+    ctx.drawImage(image, x, y, 50, 50)  
   });
 }
 function drawBullets() {
   bullets.forEach(function ({ x, y, size, color }) {
     ctx.beginPath();
-    ctx.rect(x, y, size, size);
-    // ctx.arc(x, y, size, 0, 2 * Math.PI);
-    ctx.fillStyle = color;
+    // ctx.rect(x, y, size, size);
+    // // ctx.arc(x, y, size, 0, 2 * Math.PI);
+    // ctx.fillStyle = color;
+    
+    let image = document.getElementById('fried-chicken');
+    ctx.drawImage(image, x, y, size, size)
     ctx.fill();
   });
 }
