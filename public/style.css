@@ -1,0 +1,15 @@
+#page {
+  display: flex;
+  justify-content: space-around;
+}
+#game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+canvas {
+  border: 1px solid black;
+}
+#listPlayers {
+  list-style: none;
+}
