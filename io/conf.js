@@ -6,6 +6,7 @@ module.exports = function (server) {
 
   // game state (players list)
   const players = {};
+  let bullets = [];
 
   io.on("connection", function (socket) {
     // register new player
@@ -14,7 +15,8 @@ module.exports = function (server) {
       y: 0,
       size: 30,
       speed: 2,
-      color: "#" + (((1 << 24) * Math.random()) | 0).toString(16)
+      color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
+      score: 0,
     };
 
     // CHAT PART
@@ -52,6 +54,21 @@ module.exports = function (server) {
       // console.log(`${players[socket.id].x}, ${players[socket.id].y}`);
     });
     // PLAYER ACTIONS
+    socket.on("mousedown", (x, y) => {
+      const angle = Math.atan2(
+        x - players[socket.id].x,
+        y - players[socket.id].y,
+      );
+      bullets.push({
+        shooterId: socket.id,
+        x: players[socket.id].x + players[socket.id].size / 2 - 5,
+        y: players[socket.id].y + players[socket.id].size / 2 - 5,
+        velocityX: Math.sin(angle) * 2,
+        velocityY: Math.cos(angle) * 2,
+        size: 10,
+        color: players[socket.id].color,
+      });
+    });
 
     // delete disconnected player
     socket.on("disconnect", function () {
@@ -59,7 +76,38 @@ module.exports = function (server) {
       delete players[socket.id];
     });
     function update() {
-      io.emit("players list", Object.values(players));
+      // bullets move : calculate new position
+      bullets.forEach((bullet) => {
+        bullet.x += bullet.velocityX;
+        bullet.y += bullet.velocityY;
+      });
+      //detect collisions
+      for (let i = 0; i < bullets.length; i++) {
+        for (const id in players) {
+          if (Object.hasOwnProperty.call(players, id)) {
+            if (
+              id !== bullets[i].shooterId &&
+              bullets[i].x > players[id].x &&
+              bullets[i].x < players[id].x + players[id].size &&
+              bullets[i].y > players[id].y &&
+              bullets[i].y < players[id].y + players[id].size
+            ) {
+              players[bullets[i].shooterId].score += 20;
+              players[id].score -= 10;
+            }
+          }
+        }
+      }
+      //remove collisionned bullets
+      // update player scores
+
+      // delete bullets out of map
+      bullets = bullets.filter(
+        (bullet) =>
+          bullet.x >= 0 && bullet.y >= 0 && bullet.x < 2000 && bullet.y < 2000,
+      );
+
+      io.emit("lists", Object.values(players), Object.values(bullets));
     }
 
     setInterval(update, 1000 / 60);
