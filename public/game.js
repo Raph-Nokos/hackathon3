@@ -51,38 +51,33 @@ window.onkeyup = function (e) {
 function movePlayer() {
   if (keyboard[37]) {
     socket.emit("move left");
-    socket.emit("position");
   }
   if (keyboard[38]) {
     socket.emit("move up");
-    socket.emit("position");
   }
   if (keyboard[39]) {
     socket.emit("move right");
-    socket.emit("position");
   }
   if (keyboard[40]) {
     socket.emit("move down");
-    socket.emit("position");
   }
 }
 
 // PLAYER ACTIONS
 
 function getMousePos(canvas, evt) {
-  var rect = canvas.getBoundingClientRect();
+  const rect = canvas.getBoundingClientRect();
   return {
     x: evt.clientX - rect.left,
-    y: evt.clientY - rect.top,
+    y: evt.clientY - rect.top
   };
 }
-var context = canvas.getContext("2d");
 
 canvas.addEventListener(
   "mousedown",
   function (evt) {
-    var mousePos = getMousePos(canvas, evt);
+    const mousePos = getMousePos(canvas, evt);
     socket.emit("mousedown", mousePos.x, mousePos.y);
   },
-  false,
+  false
 );

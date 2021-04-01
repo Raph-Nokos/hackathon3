@@ -7,27 +7,25 @@
 //   parent.appendChild(el);
 //   parent.scrollTop = parent.scrollHeight;
 // };
-const writePlayers = (players) => {
+
+const writePlayers = players => {
   const parent = document.querySelector("#listPlayers");
 
-  players.forEach((pl) => {
+  players.forEach(pl => {
     const text = pl.color;
 
     if (!parent.innerText.includes(pl.color)) {
       const el = document.createElement("li");
       el.id = text;
-      el.innerText = `Player ${text}: ${pl.score} points`;
+      el.innerText = `${text}: ${pl.score} points`;
       el.style.color = text;
       parent.appendChild(el);
     } else {
       const el = document.getElementById(text);
-      el.innerText = `Player ${text}: ${pl.score} points`;
+      el.innerText = `${text} : ${pl.score} points`;
     }
   });
-
-  parent.scrollTop = parent.scrollHeight;
 };
-
 // const onFormSubmitted = e => {
 //   e.preventDefault();
 //   const input = document.querySelector("#chat");
@@ -49,7 +47,7 @@ const writePlayers = (players) => {
 //   document.getElementById("askname").style.display = "block";
 // };
 
-// const socket = io();
+//
 // socket.on("message", writeEvent);
 // socket.on("newPlayer", writePlayers);
 // socket.on("askName", askName);
