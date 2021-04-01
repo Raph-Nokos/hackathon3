@@ -17,42 +17,47 @@ module.exports = function (server) {
       color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
       score: 0,
       name: "",
-      id: socket.id
+      id: socket.id,
     };
 
     // CHAT PART
 
     socket.emit("askName"); // on demande leurs noms aux joueurs
 
-    socket.on("name", name => {
+    socket.on("name", (name) => {
       players[socket.id].name = name;
       console.log(players[socket.id]);
     });
 
     // PLAYERS MOOVES
+
     socket.on("move left", function () {
       if (players[socket.id].x >= 2)
-        players[socket.id].x -= players[socket.id].speed;
+        // players[socket.id].x -= players[socket.id].speed;
+        players[socket.id].left = true;
     });
     socket.on("move up", function () {
       if (players[socket.id].y >= 2)
-        players[socket.id].y -= players[socket.id].speed;
+        //players[socket.id].y -= players[socket.id].speed;
+        players[socket.id].up = true;
     });
     socket.on("move right", function () {
       if (players[socket.id].x <= 910) {
-        players[socket.id].x += players[socket.id].speed;
+        // players[socket.id].x += players[socket.id].speed;
+        players[socket.id].right = true;
       }
     });
     socket.on("move down", function () {
       if (players[socket.id].y <= 648)
-        players[socket.id].y += players[socket.id].speed;
+        // players[socket.id].y += players[socket.id].speed;
+        players[socket.id].down = true;
     });
 
     // PLAYER ACTIONS
     socket.on("mousedown", (x, y) => {
       const angle = Math.atan2(
         x - players[socket.id].x,
-        y - players[socket.id].y
+        y - players[socket.id].y,
       );
       bullets.push({
         shooterId: socket.id,
@@ -62,7 +67,7 @@ module.exports = function (server) {
         velocityY: Math.cos(angle) * 2,
         size: 40,
         color: players[socket.id].color,
-        collisioned: false
+        collisioned: false,
       });
     });
 
@@ -73,10 +78,24 @@ module.exports = function (server) {
     });
     function update() {
       // bullets move : calculate new position
-      bullets.forEach(bullet => {
+      bullets.forEach((bullet) => {
         bullet.x += bullet.velocityX;
         bullet.y += bullet.velocityY;
       });
+      //  player moves
+      for (const id in players) {
+        if (Object.hasOwnProperty.call(players, id)) {
+          if (players[id].left) players[id].x -= players[id].speed;
+          if (players[id].right) players[id].x += players[id].speed;
+          if (players[id].up) players[id].y -= players[id].speed;
+          if (players[id].down) players[id].y += players[id].speed;
+          players[id].left = false;
+          players[id].right = false;
+          players[id].up = false;
+          players[id].down = false;
+        }
+      }
+
       //detect collisions
       for (let i = 0; i < bullets.length; i++) {
         for (const id in players) {
@@ -100,12 +119,12 @@ module.exports = function (server) {
 
       // delete bullets out of map
       bullets = bullets.filter(
-        bullet =>
+        (bullet) =>
           !bullet.collisioned &&
           bullet.x >= 0 &&
           bullet.y >= 0 &&
           bullet.x < 2000 &&
-          bullet.y < 2000
+          bullet.y < 2000,
       );
 
       io.emit("lists", Object.values(players), Object.values(bullets));
