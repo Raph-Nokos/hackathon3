@@ -10,9 +10,9 @@ module.exports = function (server) {
 
   io.on("connection", function (socket) {
     players[socket.id] = {
-      x: 0,
-      y: 0,
-      size: 30,
+      x: 5,
+      y: 5,
+      size: 50,
       speed: 2,
       color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
       score: 0,
@@ -60,7 +60,7 @@ module.exports = function (server) {
         y: players[socket.id].y + players[socket.id].size / 2 - 5,
         velocityX: Math.sin(angle) * 2,
         velocityY: Math.cos(angle) * 2,
-        size: 10,
+        size: 40,
         color: players[socket.id].color,
         collisioned: false
       });
