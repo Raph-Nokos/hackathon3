@@ -1,43 +1,17 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Node Game</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <div class="page">
-      <!-- <div id="askname">
-        <form id="nameForm">
-          <label>Choisis un pseudo : </label>
-          <input id="userName" type="text" />
-          <button id="ok">ok</button>
-        </form>
-      </div>
-
-      <ul id="events"></ul>
-    </div> -->
-      <div>
-        <canvas
-          id="canvas"
-          width="940"
-          height="680"
-          style="background: url(./img/background.png) no-repeat center center"
-        >
-        </canvas>
-      </div>
-      <div style="display: none">
-        <img id="poulet" src="./img/chick.svg" />
-        <img id="fried-chicken" src="./img/fried-chicken.svg" />
-      </div>
-      <ul id="listPlayers"></ul>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Battle Fried Chicken</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+      </head>
+      <body>
+          <div class='bodyAccueil'>
+        <h1 class='titreAcceuil'>Bienvenue ! <br/> Êtes-vous prêt pour la bataille ?</h1>
+        <img src='img/chick.svg' id='imgPoussin'/>
+        <a href='game.html'><button class='startGame'>Start Game</button></a>
     </div>
-    <button id="mute" onclick="enableMute()">mute</button>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/game.js"></script>
-    <script src="/chat.js"></script>
-
-    <!-- <script src="/chat.js"></script> -->
-  </body>
+      </body>
+      <script src="scripts.js"></script>
 </html>

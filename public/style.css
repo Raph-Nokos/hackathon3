@@ -31,3 +31,42 @@ body {
 #listPlayers {
   list-style: none;
 }
+
+.divScore{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  background:white;
+  position: absolute;
+  right: 40;
+  top: 70;
+  border-radius:3px;
+}
+#titreScore{
+  padding:3px;
+}
+.titreAcceuil{
+  color:white;
+  text-align: center;
+}
+.bodyAccueil{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.startGame{
+  width:300px;
+  height: 80px;
+  border-radius:5px;
+  background:yellow;
+  outline:none;
+  font-size:40px;
+  border:1px solid orange;
+  color:orange;
+}
+#imgPoussin{
+  height: 50vh;
+  margin:3vh;
+}
