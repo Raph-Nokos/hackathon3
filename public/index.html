@@ -3,21 +3,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Node Game</title>
-    <div> 
-      
-      <audio id="music" src="sounds/musicCountry.mp3" style="display: none" autoplay>
-        <source src="sounds/musicCountry.mp3" type="audio/mp3" />
-      </div>
-    <style>
-      canvas {
-        /* display: block; */
-        border: 1px solid grey;
-      }
-    </style>
+		<link href="style.css" rel="stylesheet" type="text/css" />
   </head>
-
   <body>
-    <div className="page">
+    <div class="page">
+      
       <!-- <div id="askname">
         <form id="nameForm">
           <label>Choisis un pseudo : </label>
@@ -28,10 +18,20 @@
 
       <ul id="events"></ul>
     </div> -->
-    <canvas id="canvas" width="940" height="680"> </canvas>
+		<div>
+    <canvas id="canvas" width="940" height="680" style="background: url(./img/background.png) no-repeat center center;" > </canvas>
+		</div>
+    <div style='display:none;'>
+      <img id='poulet' src='./img/chick.svg'>
+      <img id='fried-chicken' src='./img/fried-chicken.svg'>
+  	</div>
     <ul id="listPlayers">
     </ul>
-    <button id='mute' onclick="enableMute()">mute</button>
+
+    
+  </div>
+  <button id='mute' onclick="enableMute()">mute</button>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/game.js"></script>
     <script src="/chat.js"></script>

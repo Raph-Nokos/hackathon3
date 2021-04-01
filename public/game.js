@@ -6,34 +6,46 @@ let bullets = [];
 const ctx = canvas.getContext("2d");
 
 const audioJet = new Audio(`sounds/jet.mp3`);
-const audioColision = new Audio(`sounds/colision.mp3`);
+audioJet.muted = false;
 
-let audioMusic = document.getElementById("music");
+const audioColision = new Audio(`sounds/colision.mp3`);
+audioColision.muted = false;
+
+
+const audioMusic = new Audio(`sounds/musicCountry.mp3`)
 audioMusic.loop = true;
 audioMusic.volume = 0.2;
-audioMusic.mute = false;
+audioMusic.muted = false;
 
 const enableMute = () => {
   audioMusic.muted = !audioMusic.muted;
+  audioColision.muted = !audioColision.muted;
   audioJet.muted = !audioJet.muted;
-  document.getElementById("mute").innerHTML}
+}
 
 function drawPlayers() {
-  players.forEach(function ({ x, y, size, color }) {
+  players.forEach(function ({ x, y, size, color, name }) {
     ctx.beginPath();
     ctx.rect(x, y, size, size);
     ctx.fillStyle = color;
+    ctx.font = "14px sans-serif";
+    ctx.fillText(name, x, y - 5);
     ctx.fill();
+    let image = document.getElementById('poulet');
+    ctx.drawImage(image, x, y, 50, 50)  
   });
 }
 function drawBullets() {
   bullets.forEach(function ({ x, y, size, color }) {
+
     ctx.beginPath();
-    ctx.rect(x, y, size, size);
-    // ctx.arc(x, y, size, 0, 2 * Math.PI);
-    ctx.fillStyle = color;
+    // ctx.rect(x, y, size, size);
+    // // ctx.arc(x, y, size, 0, 2 * Math.PI);
+    // ctx.fillStyle = color;
+
+    let image = document.getElementById('fried-chicken');
+    ctx.drawImage(image, x, y, size, size)
     ctx.fill();
-    audioJet.play();
   });
 }
 socket.on("lists", function (listPlayers, listBullets) {
@@ -92,6 +104,10 @@ canvas.addEventListener(
   function (evt) {
     const mousePos = getMousePos(canvas, evt);
     socket.emit("mousedown", mousePos.x, mousePos.y);
+    audioJet.play();
+    audioMusic.play()
   },
   false
 );
+
+socket.on('colision', ()=>{audioColision.play()})
