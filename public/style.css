@@ -1,0 +1,35 @@
+body {
+	background: url("https://i.ibb.co/4SR88N8/Chick.jpg");
+	/* background-color: aqua; */
+}
+
+#canvas {
+	border: 1px solid grey;
+	width: 960px;
+	height: 680px;
+	background: lightgray;
+	/* padding: 0;
+	margin: auto;
+	display: block;
+	width: 800px;
+	height: 600px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: white; */
+}
+
+.page {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	align-self: center;
+}
+
+#listPlayers > li {
+	list-style: none;
+}
