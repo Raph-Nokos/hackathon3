@@ -1,21 +1,27 @@
 body {
-	background: url("https://i.ibb.co/4SR88N8/Chick.jpg");
+  background: url("https://i.ibb.co/4SR88N8/Chick.jpg");
+  overflow: hidden;
 }
 
 #canvas {
-	width: 960px;
-	height: 680px;
+  width: 960px;
+  height: 680px;
 }
 
 .page {
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	align-self: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-self: center;
 }
-
+#mute {
+  padding: 5px;
+  position: absolute;
+  right: 20;
+  top: 30;
+}
 /* #game {
   display: flex;
   flex-direction: column;
@@ -23,5 +29,5 @@ body {
 } */
 
 #listPlayers {
-	list-style: none;
+  list-style: none;
 }
