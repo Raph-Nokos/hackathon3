@@ -128,12 +128,13 @@ function splash(xxx, yyy, text) {
 
     const explode = (x, y, text) => {
       let particles = [];
-      let ratio = window.devicePixelRatio;
+      // let ratio = window.devicePixelRatio;
+      let ratio = 1.25;
       let c = document.createElement("canvas");
       let ctx = c.getContext("2d");
 
       c.style.position = "absolute";
-      c.style.left = x - 100 + "px";
+      c.style.left = 200 + x + "px";
       c.style.top = y - 100 + "px";
       c.style.pointerEvents = "none";
       c.style.width = 200 + "px";
