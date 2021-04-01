@@ -1,6 +1,9 @@
+const e = require("express");
+
 const socket = io();
 
 let players = [];
+let bullets = [];
 
 const ctx = canvas.getContext("2d");
 
@@ -12,13 +15,23 @@ function drawPlayers() {
     ctx.fill();
   });
 }
-socket.on("players list", function (list) {
-  players = list;
+function drawBullets() {
+  bullets.forEach(function ({ x, y, size, color }) {
+    ctx.beginPath();
+    ctx.rect(x, y, size, size);
+    ctx.fillStyle = color;
+    ctx.fill();
+  });
+}
+socket.on("lists", function (listPlayers, listBullets) {
+  players = listPlayers;
+  bullets = listBullets;
 });
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // 1.
   movePlayer();
   drawPlayers(); // 2.
+  drawBullets();
   requestAnimationFrame(update); // 3.
 }
 // first call
@@ -54,3 +67,20 @@ function movePlayer() {
 }
 
 // PLAYER ACTIONS
+
+function getMousePos(canvas, evt) {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top,
+  };
+}
+
+canvas.addEventListener(
+  "mousedown",
+  function (evt) {
+    var mousePos = getMousePos(canvas, evt);
+    socket.emit("mousedown", mousePos.x, mousePos.y);
+  },
+  false,
+);
