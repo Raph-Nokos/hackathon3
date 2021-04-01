@@ -10,27 +10,24 @@ module.exports = function (server) {
 
   io.on("connection", function (socket) {
     players[socket.id] = {
-      x: 0,
-      y: 0,
-      size: 30,
+      x: 5,
+      y: 5,
+      size: 50,
       speed: 2,
       color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
       score: 0,
-      name: ""
+      name: "",
+      id: socket.id
     };
 
     // CHAT PART
 
     socket.emit("askName"); // on demande leurs noms aux joueurs
 
-    // socket.on("message", text => {
-    //   io.emit("message", text, players[socket.id]); // io.emit envoie a tous les clients
-    // });
-    // socket.on("name", text => {
-    //   players[socket.id].name = text;
-    //   console.log(players[sock.id]);
-    //   io.emit("message", "Bonjour " + text, players[socket.id]); // io.emit envoie a tous les clients
-    // });
+    socket.on("name", name => {
+      players[socket.id].name = name;
+      console.log(players[socket.id]);
+    });
 
     // PLAYERS MOOVES
     socket.on("move left", function () {
@@ -50,9 +47,7 @@ module.exports = function (server) {
       if (players[socket.id].y <= 648)
         players[socket.id].y += players[socket.id].speed;
     });
-    socket.on("position", function () {
-      // console.log(`${players[socket.id].x}, ${players[socket.id].y}`);
-    });
+
     // PLAYER ACTIONS
     socket.on("mousedown", (x, y) => {
       const angle = Math.atan2(
@@ -65,7 +60,7 @@ module.exports = function (server) {
         y: players[socket.id].y + players[socket.id].size / 2 - 5,
         velocityX: Math.sin(angle) * 2,
         velocityY: Math.cos(angle) * 2,
-        size: 10,
+        size: 40,
         color: players[socket.id].color,
         collisioned: false
       });

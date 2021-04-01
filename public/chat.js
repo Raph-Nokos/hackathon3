@@ -12,20 +12,28 @@ const writePlayers = players => {
   const parent = document.querySelector("#listPlayers");
 
   players.forEach(pl => {
-    const text = pl.color;
+    const color = pl.color;
 
-    if (!parent.innerText.includes(pl.color)) {
+    if (!Array.from(parent.children).some(e => e.id === pl.color)) {
       const el = document.createElement("li");
-      el.id = text;
-      el.innerText = `${text}: ${pl.score} points`;
-      el.style.color = text;
+      el.id = color;
+      el.innerText = `${pl.name}: ${pl.score} points`;
+      el.style.color = color;
       parent.appendChild(el);
     } else {
-      const el = document.getElementById(text);
-      el.innerText = `${text} : ${pl.score} points`;
+      const el = document.getElementById(color);
+      el.innerText = `${pl.name} : ${pl.score} points`;
     }
   });
 };
+
+const askName = () => {
+  let name = prompt("whats your name ?");
+  socket.emit("name", name);
+};
+
+socket.on("askName", askName);
+
 // const onFormSubmitted = e => {
 //   e.preventDefault();
 //   const input = document.querySelector("#chat");
@@ -43,14 +51,9 @@ const writePlayers = players => {
 //   document.getElementById("askname").style.display = "none";
 // };
 
-// const askName = () => {
-//   document.getElementById("askname").style.display = "block";
-// };
-
 //
 // socket.on("message", writeEvent);
 // socket.on("newPlayer", writePlayers);
-// socket.on("askName", askName);
 
 // document
 //   .querySelector("#chat-form")
