@@ -7,18 +7,26 @@
 //   parent.appendChild(el);
 //   parent.scrollTop = parent.scrollHeight;
 // };
+console.log("chat.js load");
+const writePlayers = (player) => {
+  const parent = document.querySelector("#listPlayers");
 
-// const writePlayers = player => {
-//   // <ul> elem
-//   const parent = document.querySelector("#listPlayers");
+  player.forEach((pl) => {
+    if (!parent.innerText.includes(pl.color)) {
+      const el = document.createElement("li");
+      const text = pl.color;
+      el.id = text;
+      el.innerText = `Player ${text}: ${pl.score} points`;
+      el.style.color = text;
+      parent.appendChild(el);
+    } else {
+      const el = document.getElementsById(text);
+      el.innerText = `Player ${text}: ${pl.score} points`;
+    }
+  });
 
-//   // <li> elem
-//   const el = document.createElement("li");
-
-//   el.innerText = `${player.name ? player.name : "incognito"}`;
-//   parent.appendChild(el);
-//   parent.scrollTop = parent.scrollHeight;
-// };
+  parent.scrollTop = parent.scrollHeight;
+};
 
 // const onFormSubmitted = e => {
 //   e.preventDefault();

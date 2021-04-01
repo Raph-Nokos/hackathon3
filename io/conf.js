@@ -16,6 +16,7 @@ module.exports = function (server) {
       size: 30,
       speed: 2,
       color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
+      score: 0,
     };
 
     // CHAT PART
@@ -55,13 +56,13 @@ module.exports = function (server) {
     // PLAYER ACTIONS
     socket.on("mousedown", (x, y) => {
       const angle = Math.atan2(
-        x - players[socket.id].x,
-        y - players[socket.id].y,
+        x - players[socket.id].x + players[socket.id].size / 2 - 5,
+        y - players[socket.id].y + players[socket.id].size / 2 - 5,
       );
       bullets.push({
         shooterId: players[socket.id],
-        x: players[socket.id].x,
-        y: players[socket.id].y,
+        x: players[socket.id].x + players[socket.id].size / 2 - 5,
+        y: players[socket.id].y + players[socket.id].size / 2 - 5,
         velocityX: Math.sin(angle) * 2,
         velocityY: Math.cos(angle) * 2,
         size: 10,
