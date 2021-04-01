@@ -13,7 +13,7 @@ const writePlayers = (players) => {
 		} else {
 			const el = document.getElementById(color)
 			pl.hp <= 0
-				? (el.innerText = `${pl.name} s'est fait plumé`)
+				? (el.innerText = `${pl.name} s'est fait plumé avec ${pl.score} points`)
 				: (el.innerText = `${pl.name} : ${pl.score} points`)
 		}
 	})

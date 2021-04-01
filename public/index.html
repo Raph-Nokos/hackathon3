@@ -9,18 +9,19 @@
     <div class="page">
 
 
-    <h1 class="title-game">( Battle of Fried Chicken )</h1>
+    <h1 class="title-game noselect">( Battle of Fried Chicken )</h1>
 		<div>
-    <canvas id="canvas" width="940" height="680" style="background: url(./img/background.png) no-repeat center center;" > </canvas>
+    <canvas  id="canvas" width="940" height="680" style="background: url(./img/background.png) no-repeat center center;" > </canvas>
 		</div>
     <div style='display:none;'>
       <img id='poulet' src='./img/chick.svg'>
       <img id='fried-chicken' src='./img/fried-chicken.svg'>
+      <img id='chick-dead' src='./img/chick-dead.svg'>
   	</div>
-    <ul id="listPlayers">
+    <ul id="listPlayers" class='noselect'>
     </ul>
 		</div>
-		 <button id="mute" onclick="enableMute()">mute</button>
+		 <button class='noselect' id="mute" onclick="enableMute()">mute</button>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/game.js"></script>

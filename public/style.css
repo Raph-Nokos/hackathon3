@@ -1,7 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Alice&display=swap");
 @font-face {
-  font-family: "Rio Grande";
-  src: url("./police/RioGrande.ttf");
- }
+	font-family: "Rio Grande";
+	src: url("./police/RioGrande.ttf");
+}
 
 body {
 	background: url("https://i.ibb.co/4SR88N8/Chick.jpg");
@@ -28,9 +29,9 @@ body {
 	right: 20;
 	top: 30;
 }
-
-
-
+.noselect {
+	user-select: none;
+}
 #listPlayers {
 	list-style: none;
 	position: absolute;
@@ -41,10 +42,15 @@ body {
 	width: 150px;
 	height: 50vh;
 	overflow: scroll;
+	padding: 0;
 }
 
-.title-game{
-  font-family: 'Rio Grande';
-  font-size: 50px;
-  color: #37111E;
+#listPlayers li {
+	font-family: "Alice", serif;
+}
+
+.title-game {
+	font-family: "Rio Grande";
+	font-size: 50px;
+	color: #37111e;
 }
