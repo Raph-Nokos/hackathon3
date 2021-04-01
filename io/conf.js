@@ -72,6 +72,9 @@ module.exports = function (server) {
     });
 
     // delete disconnected player
+
+    // const audioColision = new Audio(`./public/sounds/colision.mp3`);
+
     socket.on("disconnect", function () {
       console.log("user disconnected");
       delete players[socket.id];
@@ -96,6 +99,7 @@ module.exports = function (server) {
               players[bullets[i].shooterId].score += 20;
               players[id].score -= 10;
               bullets[i].collisioned = true;
+              audioColision.play();
             }
           }
         }

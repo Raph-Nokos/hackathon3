@@ -5,6 +5,19 @@ let bullets = [];
 
 const ctx = canvas.getContext("2d");
 
+const audioJet = new Audio(`sounds/jet.mp3`);
+const audioColision = new Audio(`sounds/colision.mp3`);
+
+let audioMusic = document.getElementById("music");
+audioMusic.loop = true;
+audioMusic.volume = 0.2;
+audioMusic.mute = false;
+
+const enableMute = () => {
+  audioMusic.muted = !audioMusic.muted;
+  audioJet.muted = !audioJet.muted;
+  document.getElementById("mute").innerHTML}
+
 function drawPlayers() {
   players.forEach(function ({ x, y, size, color }) {
     ctx.beginPath();
@@ -20,6 +33,7 @@ function drawBullets() {
     // ctx.arc(x, y, size, 0, 2 * Math.PI);
     ctx.fillStyle = color;
     ctx.fill();
+    audioJet.play();
   });
 }
 socket.on("lists", function (listPlayers, listBullets) {
