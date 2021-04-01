@@ -17,14 +17,14 @@ module.exports = function (server) {
       color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
       score: 0,
       name: "",
-      id: socket.id
+      id: socket.id,
     };
 
     // CHAT PART
 
     socket.emit("askName"); // on demande leurs noms aux joueurs
 
-    socket.on("name", name => {
+    socket.on("name", (name) => {
       players[socket.id].name = name;
     });
 
@@ -75,7 +75,7 @@ module.exports = function (server) {
     socket.on("mousedown", (x, y) => {
       const angle = Math.atan2(
         x - players[socket.id].x,
-        y - players[socket.id].y
+        y - players[socket.id].y,
       );
       bullets.push({
         shooterId: socket.id,
@@ -85,7 +85,7 @@ module.exports = function (server) {
         velocityY: Math.cos(angle) * 2,
         size: 40,
         color: players[socket.id].color,
-        collisioned: false
+        collisioned: false,
       });
     });
 
@@ -101,7 +101,7 @@ module.exports = function (server) {
     });
     function update() {
       // bullets move : calculate new position
-      bullets.forEach(bullet => {
+      bullets.forEach((bullet) => {
         bullet.x += bullet.velocityX;
         bullet.y += bullet.velocityY;
         // audioJet.play()
@@ -127,11 +127,15 @@ module.exports = function (server) {
               bullets[i].y > players[id].y &&
               bullets[i].y < players[id].y + players[id].size
             ) {
+              io.sockets.emit(
+                "colision",
+                players[id].x + players[id].size / 2,
+                players[id].y + players[id].size / 2,
+              );
               players[bullets[i].shooterId].score += 20;
               players[id].score -= 10;
               bullets[i].collisioned = true;
               // audioColision.play();
-              socket.emit('colision')
             }
           }
         }
@@ -141,12 +145,12 @@ module.exports = function (server) {
 
       // delete bullets out of map
       bullets = bullets.filter(
-        bullet =>
+        (bullet) =>
           !bullet.collisioned &&
           bullet.x >= 0 &&
           bullet.y >= 0 &&
           bullet.x < 2000 &&
-          bullet.y < 2000
+          bullet.y < 2000,
       );
 
       io.emit("lists", Object.values(players), Object.values(bullets));
