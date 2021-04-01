@@ -32,25 +32,30 @@ module.exports = function (server) {
     // PLAYERS MOOVES
 
     socket.on("move left", function () {
-      if (players[socket.id].x >= 2)
-        // players[socket.id].x -= players[socket.id].speed;
-        players[socket.id].left = true;
+      if (players[socket.id].x >= 2) players[socket.id].left = true;
     });
     socket.on("move up", function () {
-      if (players[socket.id].y >= 2)
-        //players[socket.id].y -= players[socket.id].speed;
-        players[socket.id].up = true;
+      if (players[socket.id].y >= 2) players[socket.id].up = true;
     });
     socket.on("move right", function () {
       if (players[socket.id].x <= 910) {
-        // players[socket.id].x += players[socket.id].speed;
         players[socket.id].right = true;
       }
     });
     socket.on("move down", function () {
-      if (players[socket.id].y <= 648)
-        // players[socket.id].y += players[socket.id].speed;
-        players[socket.id].down = true;
+      if (players[socket.id].y <= 648) players[socket.id].down = true;
+    });
+    socket.on("stop left", function () {
+      players[socket.id].left = false;
+    });
+    socket.on("stop up", function () {
+      players[socket.id].up = false;
+    });
+    socket.on("stop right", function () {
+      players[socket.id].right = false;
+    });
+    socket.on("stop down", function () {
+      players[socket.id].down = false;
     });
 
     // PLAYER ACTIONS
@@ -89,10 +94,6 @@ module.exports = function (server) {
           if (players[id].right) players[id].x += players[id].speed;
           if (players[id].up) players[id].y -= players[id].speed;
           if (players[id].down) players[id].y += players[id].speed;
-          players[id].left = false;
-          players[id].right = false;
-          players[id].up = false;
-          players[id].down = false;
         }
       }
 
