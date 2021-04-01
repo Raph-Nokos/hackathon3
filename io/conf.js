@@ -26,26 +26,49 @@ module.exports = function (server) {
 
     socket.on("name", name => {
       players[socket.id].name = name;
-      console.log(players[socket.id]);
     });
 
     // PLAYERS MOOVES
+
     socket.on("move left", function () {
-      if (players[socket.id].x >= 2)
-        players[socket.id].x -= players[socket.id].speed;
+      if (players[socket.id].x >= 2) {
+        players[socket.id].left = true;
+      } else {
+        players[socket.id].left = false;
+      }
     });
     socket.on("move up", function () {
-      if (players[socket.id].y >= 2)
-        players[socket.id].y -= players[socket.id].speed;
+      if (players[socket.id].y >= 2) {
+        players[socket.id].up = true;
+      } else {
+        players[socket.id].up = false;
+      }
     });
     socket.on("move right", function () {
-      if (players[socket.id].x <= 910) {
-        players[socket.id].x += players[socket.id].speed;
+      if (players[socket.id].x <= 888) {
+        players[socket.id].right = true;
+      } else {
+        players[socket.id].right = false;
       }
     });
     socket.on("move down", function () {
-      if (players[socket.id].y <= 648)
-        players[socket.id].y += players[socket.id].speed;
+      if (players[socket.id].y <= 630) {
+        players[socket.id].down = true;
+      } else {
+        players[socket.id].down = false;
+      }
+    });
+    socket.on("stop left", function () {
+      players[socket.id].left = false;
+    });
+    socket.on("stop up", function () {
+      players[socket.id].up = false;
+    });
+    socket.on("stop right", function () {
+      players[socket.id].right = false;
+    });
+    socket.on("stop down", function () {
+      players[socket.id].down = false;
     });
 
     // PLAYER ACTIONS
@@ -56,8 +79,8 @@ module.exports = function (server) {
       );
       bullets.push({
         shooterId: socket.id,
-        x: players[socket.id].x + players[socket.id].size / 2 - 5,
-        y: players[socket.id].y + players[socket.id].size / 2 - 5,
+        x: players[socket.id].x + 10,
+        y: players[socket.id].y + 10,
         velocityX: Math.sin(angle) * 2,
         velocityY: Math.cos(angle) * 2,
         size: 40,
@@ -83,6 +106,16 @@ module.exports = function (server) {
         bullet.y += bullet.velocityY;
         // audioJet.play()
       });
+      //  player moves
+      for (const id in players) {
+        if (Object.hasOwnProperty.call(players, id)) {
+          if (players[id].left) players[id].x -= players[id].speed;
+          if (players[id].right) players[id].x += players[id].speed;
+          if (players[id].up) players[id].y -= players[id].speed;
+          if (players[id].down) players[id].y += players[id].speed;
+        }
+      }
+
       //detect collisions
       for (let i = 0; i < bullets.length; i++) {
         for (const id in players) {
