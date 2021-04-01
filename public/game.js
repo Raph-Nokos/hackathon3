@@ -11,8 +11,7 @@ audioJet.muted = false;
 const audioColision = new Audio(`sounds/colision.mp3`);
 audioColision.muted = false;
 
-
-const audioMusic = new Audio(`sounds/musicCountry.mp3`)
+const audioMusic = new Audio(`sounds/musicCountry.mp3`);
 audioMusic.loop = true;
 audioMusic.volume = 0.2;
 audioMusic.muted = false;
@@ -21,7 +20,7 @@ const enableMute = () => {
   audioMusic.muted = !audioMusic.muted;
   audioColision.muted = !audioColision.muted;
   audioJet.muted = !audioJet.muted;
-}
+};
 
 function drawPlayers() {
   players.forEach(function ({ x, y, size, color, name }) {
@@ -37,19 +36,13 @@ function drawPlayers() {
 }
 function drawBullets() {
   bullets.forEach(function ({ x, y, size, color }) {
-
     ctx.beginPath();
     // ctx.rect(x, y, size, size);
     // // ctx.arc(x, y, size, 0, 2 * Math.PI);
     // ctx.fillStyle = color;
 
-<<<<<<< HEAD
-    let image = document.getElementById('fried-chicken');
-    ctx.drawImage(image, x, y, size, size)
-=======
     let image = document.getElementById("fried-chicken");
     ctx.drawImage(image, x, y, size, size);
->>>>>>> cc6cc5f98642443fe9eee0e6cf04a7a3b0d95303
     ctx.fill();
   });
 }
@@ -72,12 +65,10 @@ requestAnimationFrame(update);
 const keyboard = {};
 
 window.onkeydown = function (e) {
-  console.log("kdo", e.keyCode);
   keyboard[e.keyCode] = true;
 };
 
 window.onkeyup = function (e) {
-  console.log("kup", e.keyCode);
   delete keyboard[e.keyCode];
 };
 
@@ -117,9 +108,11 @@ canvas.addEventListener(
     const mousePos = getMousePos(canvas, evt);
     socket.emit("mousedown", mousePos.x, mousePos.y);
     audioJet.play();
-    audioMusic.play()
+    audioMusic.play();
   },
   false,
 );
 
-socket.on('colision', ()=>{audioColision.play()})
+socket.on("colision", () => {
+  audioColision.play();
+});
