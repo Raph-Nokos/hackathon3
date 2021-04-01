@@ -16,14 +16,15 @@ function drawPlayers() {
 function drawBullets() {
   bullets.forEach(function ({ x, y, size, color }) {
     ctx.beginPath();
-    //  ctx.rect(x, y, size, size);
-    ctx.arc(x, y, size, 0, 2 * Math.PI);
+    ctx.rect(x, y, size, size);
+    // ctx.arc(x, y, size, 0, 2 * Math.PI);
     ctx.fillStyle = color;
     ctx.fill();
   });
 }
 socket.on("lists", function (listPlayers, listBullets) {
-  if (listPlayers.length != players.length) writePlayers(listPlayers);
+  // if (listPlayers.length != players.length)
+  writePlayers(listPlayers);
   players = listPlayers;
   bullets = listBullets;
 });
