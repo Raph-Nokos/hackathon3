@@ -17,33 +17,46 @@ module.exports = function (server) {
       color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
       score: 0,
       name: "",
-      id: socket.id,
+      id: socket.id
     };
 
     // CHAT PART
 
     socket.emit("askName"); // on demande leurs noms aux joueurs
 
-    socket.on("name", (name) => {
+    socket.on("name", name => {
       players[socket.id].name = name;
-      console.log(players[socket.id]);
     });
 
     // PLAYERS MOOVES
 
     socket.on("move left", function () {
-      if (players[socket.id].x >= 2) players[socket.id].left = true;
+      if (players[socket.id].x >= 2) {
+        players[socket.id].left = true;
+      } else {
+        players[socket.id].left = false;
+      }
     });
     socket.on("move up", function () {
-      if (players[socket.id].y >= 2) players[socket.id].up = true;
+      if (players[socket.id].y >= 2) {
+        players[socket.id].up = true;
+      } else {
+        players[socket.id].up = false;
+      }
     });
     socket.on("move right", function () {
-      if (players[socket.id].x <= 910) {
+      if (players[socket.id].x <= 888) {
         players[socket.id].right = true;
+      } else {
+        players[socket.id].right = false;
       }
     });
     socket.on("move down", function () {
-      if (players[socket.id].y <= 648) players[socket.id].down = true;
+      if (players[socket.id].y <= 630) {
+        players[socket.id].down = true;
+      } else {
+        players[socket.id].down = false;
+      }
     });
     socket.on("stop left", function () {
       players[socket.id].left = false;
@@ -62,17 +75,17 @@ module.exports = function (server) {
     socket.on("mousedown", (x, y) => {
       const angle = Math.atan2(
         x - players[socket.id].x,
-        y - players[socket.id].y,
+        y - players[socket.id].y
       );
       bullets.push({
         shooterId: socket.id,
-        x: players[socket.id].x + players[socket.id].size / 2 - 5,
-        y: players[socket.id].y + players[socket.id].size / 2 - 5,
+        x: players[socket.id].x + 10,
+        y: players[socket.id].y + 10,
         velocityX: Math.sin(angle) * 2,
         velocityY: Math.cos(angle) * 2,
         size: 40,
         color: players[socket.id].color,
-        collisioned: false,
+        collisioned: false
       });
     });
 
@@ -83,7 +96,7 @@ module.exports = function (server) {
     });
     function update() {
       // bullets move : calculate new position
-      bullets.forEach((bullet) => {
+      bullets.forEach(bullet => {
         bullet.x += bullet.velocityX;
         bullet.y += bullet.velocityY;
       });
@@ -120,12 +133,12 @@ module.exports = function (server) {
 
       // delete bullets out of map
       bullets = bullets.filter(
-        (bullet) =>
+        bullet =>
           !bullet.collisioned &&
           bullet.x >= 0 &&
           bullet.y >= 0 &&
           bullet.x < 2000 &&
-          bullet.y < 2000,
+          bullet.y < 2000
       );
 
       io.emit("lists", Object.values(players), Object.values(bullets));
