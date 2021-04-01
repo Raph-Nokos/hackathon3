@@ -32,41 +32,41 @@ body {
   list-style: none;
 }
 
-.divScore{
+.divScore {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: left;
-  background:white;
+  background: white;
   position: absolute;
   right: 40;
   top: 70;
-  border-radius:3px;
+  border-radius: 3px;
 }
-#titreScore{
-  padding:3px;
+#titreScore {
+  padding: 3px;
 }
-.titreAcceuil{
-  color:white;
+.titreAccueil {
+  color: white;
   text-align: center;
 }
-.bodyAccueil{
-  display:flex;
+.bodyAccueil {
+  display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
-.startGame{
-  width:300px;
+.startGame {
+  width: 300px;
   height: 80px;
-  border-radius:5px;
-  background:yellow;
-  outline:none;
-  font-size:40px;
-  border:1px solid orange;
-  color:orange;
+  border-radius: 5px;
+  background: yellow;
+  outline: none;
+  font-size: 40px;
+  border: 1px solid orange;
+  color: orange;
 }
-#imgPoussin{
+#imgPoussin {
   height: 50vh;
-  margin:3vh;
+  margin: 3vh;
 }
