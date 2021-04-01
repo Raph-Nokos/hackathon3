@@ -27,7 +27,7 @@ module.exports = function (server) {
 		socket.emit("askName") // ASK TO PLAYER A NAME
 
 		socket.on("name", (name) => {
-			players[socket.id].name = name //ATRIBUTE NAME CHOOSEN TO PLAYER[SOCKET.ID]
+			players[socket.id].name = name //GIVE NAME CHOOSEN TO PLAYER[SOCKET.ID]
 		})
 		// PLAYERS MOOVES
 		socket.on("move left", function () {
