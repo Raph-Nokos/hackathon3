@@ -6,10 +6,12 @@ let bullets = [];
 const ctx = canvas.getContext("2d");
 
 function drawPlayers() {
-  players.forEach(function ({ x, y, size, color }) {
+  players.forEach(function ({ x, y, size, color, name }) {
     ctx.beginPath();
     ctx.rect(x, y, size, size);
     ctx.fillStyle = color;
+    ctx.font = "14px sans-serif";
+    ctx.fillText(name, x, y - 5);
     ctx.fill();
     let image = document.getElementById('poulet');
     ctx.drawImage(image, x, y, 50, 50)  
