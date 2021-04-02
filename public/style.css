@@ -28,7 +28,15 @@ body {
 	position: absolute;
 	right: 20;
 	top: 30;
+	width: 50px;
+	background: none;
+	border: none;
 }
+
+#mute:focus{
+	outline: none;
+}
+
 .noselect {
 	user-select: none;
 }
