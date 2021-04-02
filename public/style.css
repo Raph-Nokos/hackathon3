@@ -24,25 +24,34 @@ body {
 }
 
 #mute {
-  padding: 5px;
-  position: absolute;
-  right: 20;
-  top: 30;
+	padding: 5px;
+	position: absolute;
+	right: 20;
+	top: 30;
+	width: 50px;
+	background: none;
+	border: none;
+  cursor:pointer;
 }
+
+#mute:focus{
+	outline: none;
+}
+
 .noselect {
   user-select: none;
 }
 #listPlayers {
-  list-style: none;
-  position: absolute;
-  top: 30%;
-  right: 20px;
-  border: 1px solid black;
-  background-color: white;
-  width: 150px;
-  height: 50vh;
-  overflow: scroll;
-  padding: 0;
+	list-style: none;
+	position: absolute;
+	top: 30%;
+	right: 40px;
+	border: 1px solid #71666C;
+	background-color: #CDCEBE;
+	width: 200px;
+	height: 60vh;
+	overflow: scroll;
+	padding: 0;
 }
 
 #listPlayers li {
@@ -100,6 +109,7 @@ body {
   background: yellow;
   outline: none;
   font-size: 40px;
+  font-family: "Alice", serif;
   border: 1px solid orange;
   color: orange;
   cursor: pointer;
@@ -107,4 +117,9 @@ body {
 #imgPoussin {
   height: 50vh;
   margin: 3vh;
+}
+
+.title-score{
+	font-family: "Alice", serif;
+	font-size: 20px;
 }
